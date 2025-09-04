@@ -26,11 +26,7 @@ userprofile:
   service:
     port: 80
     type: LoadBalancer
-
-config:
-  mongodbUri: "mongodb://mongodb-service:27017/myDatabase"
-  port: "3130"
-
+    
 secret:
   sessionSecret: "1234"
   emailUser: "chagantyteja2502@gmail.com"
