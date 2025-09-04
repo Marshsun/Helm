@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-userprofile-deployment
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.userprofile.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.userprofile.labels.app }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.userprofile.labels.app }}
+    spec:
+      containers:
+        - name: {{ .Values.userprofile.name }}
+          image: "{{ .Values.userprofile.image.repository }}:{{ .Values.userprofile.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.userprofile.port }}
+          envFrom:
+            - secretRef:
+                name: {{ .Release.Name }}-userprofile-secret

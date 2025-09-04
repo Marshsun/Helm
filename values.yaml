@@ -1,0 +1,37 @@
+namespace: sunmarsh
+
+mongodb:
+  replicas: 2
+  labels:
+    app: mongodb
+  name: mongodb-container
+  image:
+    repository: mongo
+    tag: latest
+  port: 27017
+  database: myDatabase
+  service:
+    port: 27017
+    type: ClusterIP
+
+userprofile:
+  replicas: 2
+  labels:
+    app: userprofile
+  name: userprofile-container
+  image:
+    repository: saiteja2502/userprofileretail
+    tag: latest
+  port: 3130
+  service:
+    port: 80
+    type: LoadBalancer
+
+config:
+  mongodbUri: "mongodb://mongodb-service:27017/myDatabase"
+  port: "3130"
+
+secret:
+  sessionSecret: "1234"
+  emailUser: "chagantyteja2502@gmail.com"
+  emailPass: "yxoq bjuk rdnt alzp"
